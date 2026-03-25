@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="description" content="Free Will AI — 18 autonomous AI agents working 24/7 to generate passive income. Built by Michael Meier Jr."/>
+<meta property="og:title" content="Free Will AI — 18 Agents. Zero Work. Pure Passive Income."/>
+<meta property="og:description" content="The most advanced AI passive income platform ever built. 18 autonomous agents run your entire online business while you sleep."/>
+<title>Free Will AI — Your Autonomous Income Empire</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#050709;--bg2:#080b10;--card:#0a0d14;--card2:#0e1119;
+  --blue:#4f8ef7;--cyan:#22d3ee;--green:#4ade80;--amber:#fbbf24;
+  --pink:#f472b6;--purple:#a78bfa;--red:#f87171;--orange:#fb923c;
+  --text:#e8edf8;--muted:#4a5272;--border:rgba(79,142,247,0.1);
+  --glow-blue:rgba(79,142,247,0.15);--glow-green:rgba(74,222,128,0.12);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;}
+
+/* GRID BACKGROUND */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:linear-gradient(rgba(79,142,247,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(79,142,247,.03) 1px,transparent 1px);
+  background-size:50px 50px;pointer-events:none;z-index:0;
+}
+
+/* NOISE */
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.6;}
+
+/* BLOBS */
+.blob{position:fixed;border-radius:50%;filter:blur(160px);pointer-events:none;z-index:0;}
+.b1{width:600px;height:600px;background:rgba(79,142,247,.05);top:-200px;left:-100px;}
+.b2{width:500px;height:500px;background:rgba(74,222,128,.04);bottom:-150px;right:-150px;}
+.b3{width:300px;height:300px;background:rgba(167,139,250,.04);top:40%;left:60%;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:200;background:rgba(5,7,9,.92);backdrop-filter:blur(32px);border-bottom:1px solid var(--border);height:58px;display:flex;align-items:center;padding:0 20px;gap:8px;}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:auto;}
+.logo-icon{position:relative;width:30px;height:30px;}
+.logo-ring{position:absolute;inset:0;border:2px solid var(--blue);border-bottom:none;border-radius:50% 50% 0 0;filter:drop-shadow(0 0 10px rgba(79,142,247,.8));}
+.logo-ring2{position:absolute;width:18px;height:18px;border:1.5px solid rgba(167,139,250,.5);border-bottom:none;border-radius:50% 50% 0 0;top:6px;left:6px;}
+.logo-dot{position:absolute;width:5px;height:5px;background:var(--cyan);border-radius:50%;bottom:3px;left:50%;transform:translateX(-50%);box-shadow:0 0 10px var(--cyan);}
+.logo-name{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--text);}
+.logo-name span{color:var(--blue);}
+.nav-link{color:var(--muted);font-size:13px;text-decoration:none;padding:6px 10px;border-radius:6px;transition:.2s;font-weight:500;}
+.nav-link:hover{color:var(--text);}
+.nav-btn{background:linear-gradient(135deg,var(--blue),var(--cyan));color:#fff;font-weight:700;font-size:12px;padding:8px 16px;border:none;border-radius:8px;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:none;letter-spacing:.5px;transition:.2s;}
+.nav-btn:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(79,142,247,.4);}
+
+/* ANNOUNCE */
+.announce{background:linear-gradient(90deg,rgba(79,142,247,.08),rgba(34,211,238,.08),rgba(79,142,247,.08));border-bottom:1px solid rgba(79,142,247,.12);padding:9px 16px;text-align:center;font-size:12px;color:var(--text);position:relative;z-index:10;}
+.announce strong{color:var(--cyan);}
+.announce a{color:var(--pink);text-decoration:underline;cursor:pointer;font-weight:600;}
+
+/* HERO */
+.hero{position:relative;z-index:1;padding:70px 20px 50px;text-align:center;max-width:800px;margin:0 auto;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(74,222,128,.06);border:1px solid rgba(74,222,128,.18);border-radius:30px;padding:7px 18px;font-size:11px;font-weight:700;color:var(--green);margin-bottom:28px;letter-spacing:1.5px;text-transform:uppercase;animation:fadeUp .5s ease both;}
+.pulse-dot{width:7px;height:7px;background:var(--green);border-radius:50%;animation:livepulse 2s infinite;flex-shrink:0;}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,13vw,96px);line-height:.95;letter-spacing:3px;margin-bottom:10px;animation:fadeUp .5s .1s ease both;}
+.hero h1 .line1{display:block;color:var(--text);}
+.hero h1 .line2{display:block;background:linear-gradient(135deg,var(--blue),var(--cyan),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub-tag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-bottom:20px;animation:fadeUp .5s .15s ease both;}
+.hero p{font-size:16px;color:var(--muted);line-height:1.75;max-width:560px;margin:0 auto 38px;animation:fadeUp .5s .2s ease both;}
+.hero p strong{color:var(--text);}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;animation:fadeUp .5s .3s ease both;}
+.btn-primary{background:linear-gradient(135deg,var(--blue),var(--cyan));color:#050709;font-family:'DM Sans',sans-serif;font-weight:800;font-size:15px;padding:16px 34px;border:none;border-radius:12px;cursor:pointer;transition:.25s;text-decoration:none;display:inline-block;letter-spacing:.3px;}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 40px rgba(79,142,247,.45);}
+.btn-secondary{background:transparent;border:1px solid rgba(79,142,247,.25);color:var(--text);font-family:'DM Sans',sans-serif;font-weight:600;font-size:15px;padding:16px 28px;border-radius:12px;cursor:pointer;transition:.2s;text-decoration:none;display:inline-block;}
+.btn-secondary:hover{border-color:rgba(79,142,247,.5);color:var(--blue);}
+
+/* SOCIAL PROOF */
+.proof{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:36px;flex-wrap:wrap;animation:fadeUp .5s .4s ease both;}
+.avs{display:flex;}
+.av{width:32px;height:32px;border-radius:50%;border:2px solid var(--bg);margin-left:-8px;font-size:14px;display:flex;align-items:center;justify-content:center;background:var(--card2);}
+.av:first-child{margin-left:0;}
+.proof-txt{font-size:13px;color:var(--muted);}
+.proof-txt strong{color:var(--text);}
+.stars{color:var(--amber);font-size:12px;letter-spacing:1px;}
+
+/* TICKER */
+.ticker{background:rgba(74,222,128,.03);border-top:1px solid rgba(74,222,128,.07);border-bottom:1px solid rgba(74,222,128,.07);padding:12px 20px;display:flex;justify-content:center;gap:28px;flex-wrap:wrap;font-size:11px;font-family:'JetBrains Mono',monospace;position:relative;z-index:1;}
+.tick{display:flex;align-items:center;gap:7px;color:var(--muted);}
+.tick strong{color:var(--green);}
+
+/* COUNTDOWN */
+.cd-wrap{position:relative;z-index:1;margin:0 16px 10px;background:linear-gradient(135deg,rgba(244,114,182,.05),rgba(167,139,250,.05));border:1px solid rgba(244,114,182,.15);border-radius:16px;padding:20px;text-align:center;}
+.cd-wrap h3{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;margin-bottom:4px;color:var(--pink);}
+.cd-wrap p{font-size:12px;color:var(--muted);margin-bottom:14px;}
+.cd{display:flex;justify-content:center;gap:14px;}
+.cd-b{text-align:center;}
+.cd-n{font-family:'JetBrains Mono',monospace;font-size:30px;font-weight:700;color:var(--pink);display:block;line-height:1;}
+.cd-l{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:2px;margin-top:3px;display:block;}
+
+/* SECTION */
+section{position:relative;z-index:1;padding:56px 20px;max-width:800px;margin:0 auto;}
+.sec-tag{font-size:10px;font-weight:700;letter-spacing:3px;color:var(--cyan);text-transform:uppercase;margin-bottom:10px;font-family:'JetBrains Mono',monospace;}
+.sec-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(30px,7vw,52px);letter-spacing:2px;margin-bottom:12px;line-height:1.0;}
+.sec-sub{font-size:14px;color:var(--muted);line-height:1.7;max-width:540px;margin-bottom:36px;}
+
+/* AGENT GRID */
+.agent-grid{display:grid;grid-template-columns:1fr;gap:10px;}
+@media(min-width:500px){.agent-grid{grid-template-columns:1fr 1fr;}}
+.agent-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;position:relative;overflow:hidden;transition:.25s;cursor:default;}
+.agent-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--glow-color,rgba(79,142,247,.04)),transparent);pointer-events:none;}
+.agent-card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent-color,var(--blue)),transparent);opacity:.5;}
+.agent-card:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,0,0,.3);}
+.agent-card.active{border-color:rgba(79,142,247,.25);}
+.agent-header{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.agent-icon{font-size:22px;flex-shrink:0;}
+.agent-name{font-size:13px;font-weight:700;flex:1;}
+.agent-status-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.dot-active{background:var(--green);animation:livepulse 2s infinite;}
+.dot-idle{background:var(--muted);}
+.dot-earning{background:var(--amber);animation:livepulse 1.5s infinite;}
+.agent-desc{font-size:12px;color:var(--muted);line-height:1.55;margin-bottom:10px;}
+.agent-status-text{font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.agent-income{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;margin-top:6px;}
+.income-green{color:var(--green);}
+.income-amber{color:var(--amber);}
+/* progress bar */
+.agent-progress{height:2px;background:rgba(255,255,255,.05);border-radius:2px;margin-top:10px;overflow:hidden;}
+.agent-progress-fill{height:100%;border-radius:2px;transition:width .8s ease;}
+
+/* INCOME STREAMS */
+.streams-grid{display:grid;grid-template-columns:1fr;gap:11px;}
+@media(min-width:480px){.streams-grid{grid-template-columns:1fr 1fr 1fr;}}
+.stream-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;text-align:center;transition:.2s;position:relative;overflow:hidden;}
+.stream-card:hover{border-color:rgba(79,142,247,.25);transform:translateY(-2px);}
+.stream-icon{font-size:26px;margin-bottom:10px;}
+.stream-name{font-size:13px;font-weight:700;margin-bottom:4px;}
+.stream-desc{font-size:11px;color:var(--muted);line-height:1.5;}
+.stream-potential{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--green);margin-top:8px;font-weight:600;}
+
+/* PRICING */
+.price-grid{display:flex;flex-direction:column;gap:13px;}
+.price-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:26px;position:relative;overflow:hidden;transition:.25s;}
+.price-card.pop{border-color:rgba(79,142,247,.35);box-shadow:0 0 60px rgba(79,142,247,.07);}
+.price-card.pop::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(79,142,247,.04),rgba(34,211,238,.02));pointer-events:none;}
+.price-card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--blue),transparent);}
+.pop-tag{position:absolute;top:16px;right:16px;background:linear-gradient(135deg,var(--blue),var(--cyan));color:#050709;font-size:9px;font-weight:800;padding:3px 12px;border-radius:20px;letter-spacing:1px;}
+.price-tier{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:3px;margin-bottom:8px;}
+.price-val{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:1px;color:var(--blue);line-height:1;}
+.price-val sup{font-size:24px;vertical-align:top;margin-top:10px;display:inline-block;font-family:'DM Sans',sans-serif;font-weight:700;}
+.price-val sub{font-size:14px;font-family:'DM Sans',sans-serif;color:var(--muted);font-weight:400;letter-spacing:0;}
+.price-agents{font-size:12px;color:var(--cyan);font-weight:600;margin:8px 0 4px;font-family:'JetBrains Mono',monospace;}
+.price-desc{font-size:13px;color:var(--muted);margin-bottom:18px;line-height:1.5;}
+.price-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:22px;}
+.price-list li{font-size:13px;color:var(--muted);display:flex;align-items:flex-start;gap:8px;line-height:1.4;}
+.price-list li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;margin-top:1px;}
+.btn-plan{width:100%;background:linear-gradient(135deg,var(--blue),var(--cyan));color:#050709;font-family:'DM Sans',sans-serif;font-weight:800;font-size:14px;padding:14px;border:none;border-radius:10px;cursor:pointer;transition:.2s;letter-spacing:.3px;}
+.btn-plan:hover{opacity:.9;transform:translateY(-1px);box-shadow:0 6px 24px rgba(79,142,247,.35);}
+.btn-plan.out{background:transparent;border:1px solid var(--border);color:var(--text);}
+.btn-plan.out:hover{border-color:rgba(79,142,247,.35);color:var(--blue);}
+.pay-logos{display:flex;justify-content:center;gap:10px;margin-top:20px;flex-wrap:wrap;}
+.pay-logo{background:var(--card2);border:1px solid var(--border);border-radius:7px;padding:7px 13px;font-size:11px;font-weight:700;color:var(--muted);}
+
+/* REVENUE DASHBOARD PREVIEW */
+.dash-preview{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px;overflow:hidden;position:relative;}
+.dash-preview::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--blue),transparent);}
+.dash-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
+.dash-title-txt{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;}
+.dash-live{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--green);font-family:'JetBrains Mono',monospace;}
+.rev-big{text-align:center;padding:20px;background:rgba(74,222,128,.04);border:1px solid rgba(74,222,128,.1);border-radius:12px;margin-bottom:14px;}
+.rev-big-val{font-family:'JetBrains Mono',monospace;font-size:42px;font-weight:700;color:var(--green);text-shadow:0 0 40px rgba(74,222,128,.25);}
+.rev-big-lbl{font-size:11px;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:1.5px;}
+.mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;}
+.mini{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;}
+.mini-v{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:600;color:var(--blue);}
+.mini-l{font-size:10px;color:var(--muted);margin-top:3px;text-transform:uppercase;letter-spacing:.8px;}
+
+/* AFFILIATE */
+.aff-box{background:linear-gradient(135deg,rgba(74,222,128,.05),rgba(79,142,247,.05));border:1px solid rgba(74,222,128,.16);border-radius:18px;padding:30px 22px;text-align:center;}
+.aff-pct{font-family:'Bebas Neue',sans-serif;font-size:80px;letter-spacing:4px;color:var(--green);text-shadow:0 0 60px rgba(74,222,128,.2);line-height:1;}
+.aff-sub{font-size:14px;color:var(--muted);margin:6px 0 24px;}
+.aff-steps{text-align:left;display:flex;flex-direction:column;gap:11px;margin-bottom:24px;}
+.aff-step{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--muted);}
+.aff-n{width:26px;height:26px;border-radius:50%;background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.18);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--green);flex-shrink:0;}
+.btn-aff{background:linear-gradient(135deg,var(--green),#15803d);color:#052e0a;font-family:'DM Sans',sans-serif;font-weight:800;font-size:15px;padding:15px 36px;border:none;border-radius:11px;cursor:pointer;transition:.2s;}
+.btn-aff:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(74,222,128,.28);}
+
+/* FOUNDER */
+.founder{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:30px 24px;position:relative;overflow:hidden;}
+.founder::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan),var(--green));}
+.founder-inner{display:flex;flex-direction:column;gap:20px;}
+@media(min-width:520px){.founder-inner{flex-direction:row;align-items:flex-start;}}
+.f-av{width:88px;height:88px;border-radius:16px;background:linear-gradient(135deg,rgba(79,142,247,.15),rgba(34,211,238,.1));border:2px solid rgba(79,142,247,.25);display:flex;align-items:center;justify-content:center;font-size:44px;flex-shrink:0;}
+.f-name{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:2px;margin-bottom:2px;}
+.f-title{font-size:12px;color:var(--cyan);font-weight:600;font-family:'JetBrains Mono',monospace;margin-bottom:12px;letter-spacing:1px;}
+.f-bio p{font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:10px;}
+.f-bio strong{color:var(--text);}
+.f-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+.f-link{background:var(--card2);border:1px solid var(--border);color:var(--muted);font-size:12px;font-weight:600;padding:7px 13px;border-radius:8px;text-decoration:none;transition:.2s;}
+.f-link:hover{color:var(--blue);border-color:rgba(79,142,247,.3);}
+
+/* LEAD MAGNET */
+.magnet{background:linear-gradient(135deg,rgba(79,142,247,.06),rgba(34,211,238,.06));border:1px solid rgba(79,142,247,.16);border-radius:18px;padding:32px 22px;text-align:center;}
+.magnet h2{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;margin-bottom:8px;}
+.magnet p{font-size:14px;color:var(--muted);margin-bottom:22px;line-height:1.6;}
+.magnet-form{display:flex;flex-direction:column;gap:10px;max-width:420px;margin:0 auto;}
+@media(min-width:460px){.magnet-form{flex-direction:row;}}
+.magnet-input{flex:1;background:rgba(255,255,255,.95);border:none;border-radius:10px;padding:13px 16px;font-size:14px;color:#111;font-family:'DM Sans',sans-serif;outline:none;}
+.btn-magnet{background:linear-gradient(135deg,var(--blue),var(--cyan));color:#050709;font-family:'DM Sans',sans-serif;font-weight:800;font-size:14px;padding:13px 22px;border:none;border-radius:10px;cursor:pointer;white-space:nowrap;transition:.2s;}
+.btn-magnet:hover{opacity:.88;}
+.magnet-note{font-size:11px;color:var(--muted);margin-top:10px;}
+.magnet-ok{display:none;color:var(--green);font-size:14px;font-weight:600;margin-top:14px;}
+
+/* FOOTER */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:44px 20px 32px;position:relative;z-index:1;}
+.footer-inner{max-width:800px;margin:0 auto;}
+.f-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:var(--text);margin-bottom:8px;}
+.f-logo span{color:var(--blue);}
+.f-tagline{font-size:13px;color:var(--muted);margin-bottom:28px;line-height:1.6;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;}
+.f-cols{display:flex;flex-wrap:wrap;gap:28px;margin-bottom:28px;}
+.f-col h4{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:14px;font-family:'JetBrains Mono',monospace;}
+.f-col a{display:block;font-size:13px;color:var(--muted);text-decoration:none;margin-bottom:9px;transition:.2s;}
+.f-col a:hover{color:var(--blue);}
+.f-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;padding-top:20px;border-top:1px solid var(--border);font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;}
+.f-bottom a{color:var(--muted);text-decoration:none;}
+.f-bottom a:hover{color:var(--blue);}
+
+/* BOTTOM NAV */
+.bnav{position:fixed;bottom:0;left:0;right:0;background:rgba(5,7,9,.96);backdrop-filter:blur(24px);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:10px 0 16px;z-index:100;}
+.bnav-a{background:none;border:none;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:9px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;padding:0 8px;transition:.2s;text-decoration:none;text-transform:uppercase;letter-spacing:.5px;}
+.bnav-a:hover,.bnav-a.active{color:var(--blue);}
+.bnav-i{font-size:18px;}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes livepulse{0%,100%{box-shadow:0 0 0 0 rgba(74,222,128,.5);}70%{box-shadow:0 0 0 6px rgba(74,222,128,0);}}
+@keyframes scanline{0%{transform:translateX(-100%);}100%{transform:translateX(100vw);}}
+.fade-in{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease;}
+.fade-in.vis{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+
+<!-- ANNOUNCE -->
+<div class="announce">
+  ⚡ <strong>18 AUTONOMOUS AGENTS.</strong> Zero daily work. Pure passive income. <a onclick="document.getElementById('agents').scrollIntoView({behavior:'smooth'})">See all agents →</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="/">
+    <div class="logo-icon"><div class="logo-ring"></div><div class="logo-ring2"></div><div class="logo-dot"></div></div>
+    <span class="logo-name">FREE<span>WILL</span> AI</span>
+  </a>
+  <a class="nav-link" href="#agents">Agents</a>
+  <a class="nav-link" href="#income">Income</a>
+  <a class="nav-link" href="#pricing">Pricing</a>
+  <a class="nav-link" href="about.html">Story</a>
+  <a class="nav-btn" href="portal.html">Launch →</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow"><div class="pulse-dot"></div>18 AI Agents Active Right Now</div>
+  <h1>
+    <span class="line1">PASSIVE INCOME.</span>
+    <span class="line2">FULLY AUTOMATED.</span>
+  </h1>
+  <div class="hero-sub-tag">Your AI · Your Rules · Your Income</div>
+  <p>18 autonomous AI agents research trends, write content, publish across every platform, insert affiliate links, build email lists, sell digital products, and optimize your revenue — <strong>every single hour, without you touching anything.</strong></p>
+  <div class="hero-btns">
+    <a class="btn-primary" href="portal.html">Deploy My AI Agents →</a>
+    <a class="btn-secondary" href="#agents">See All 18 Agents</a>
+  </div>
+  <div class="proof">
+    <div class="avs"><div class="av">👨</div><div class="av">👩</div><div class="av">🧑</div><div class="av">👨‍💼</div><div class="av" style="font-size:10px;font-weight:700;color:var(--blue);">847+</div></div>
+    <div><div class="stars">★★★★★</div><div class="proof-txt"><strong>847 users</strong> earning on autopilot</div></div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="tick">🤖 Posts today: <strong id="t1">14,203</strong></div>
+  <div class="tick">💰 Revenue today: <strong id="t2">$8,421</strong></div>
+  <div class="tick">📧 Emails sent: <strong id="t3">3,847</strong></div>
+  <div class="tick">🛍️ Products sold: <strong id="t4">142</strong></div>
+  <div class="tick">⚡ Agents running: <strong>18</strong></div>
+</div>
+
+<!-- COUNTDOWN -->
+<div class="cd-wrap fade-in">
+  <h3>🔥 LAUNCH WEEK ENDS IN</h3>
+  <p>40% off forever — price increases when timer hits zero</p>
+  <div class="cd">
+    <div class="cd-b"><span class="cd-n" id="cd-d">06</span><span class="cd-l">Days</span></div>
+    <div class="cd-b"><span class="cd-n" id="cd-h">23</span><span class="cd-l">Hours</span></div>
+    <div class="cd-b"><span class="cd-n" id="cd-m">41</span><span class="cd-l">Mins</span></div>
+    <div class="cd-b"><span class="cd-n" id="cd-s">09</span><span class="cd-l">Secs</span></div>
+  </div>
+</div>
+
+<!-- AGENTS -->
+<section id="agents" class="fade-in">
+  <div class="sec-tag">// AUTONOMOUS AGENTS</div>
+  <div class="sec-h">18 AGENTS.<br/>ZERO WORK.</div>
+  <p class="sec-sub">Every agent runs independently, earns money in a different way, and reports back to your dashboard. Set up once — they run forever.</p>
+
+  <div class="agent-grid" id="agent-grid">
+    <!-- Populated by JS -->
+  </div>
+</section>
+
+<!-- INCOME STREAMS -->
+<section id="income" class="fade-in">
+  <div class="sec-tag">// INCOME STREAMS</div>
+  <div class="sec-h">MONEY COMING IN<br/>FROM EVERY DIRECTION.</div>
+  <p class="sec-sub">Each agent activates a different revenue channel. Combined, they create a diversified passive income portfolio that compounds every month.</p>
+  <div class="streams-grid">
+    <div class="stream-card"><div class="stream-icon">📱</div><div class="stream-name">Social Media Affiliate</div><div class="stream-desc">AI posts content with embedded affiliate links across 5 platforms 24/7</div><div class="stream-potential">$200–$3,000/mo</div></div>
+    <div class="stream-card"><div class="stream-icon">📧</div><div class="stream-name">Email Newsletter</div><div class="stream-desc">Auto-built list, auto-written emails, auto-monetized with affiliate deals</div><div class="stream-potential">$100–$2,000/mo</div></div>
+    <div class="stream-card"><div class="stream-icon">📺</div><div class="stream-name">Faceless YouTube</div><div class="stream-desc">AI scripts + titles for faceless channels earning AdSense & affiliate</div><div class="stream-potential">$150–$5,000/mo</div></div>
+    <div class="stream-card"><div class="stream-icon">✍️</div><div class="stream-name">Medium Partner Program</div><div class="stream-desc">AI-written articles auto-published to earn Medium's partner revenue share</div><div class="stream-potential">$50–$800/mo</div></div>
+    <div class="stream-card"><div class="stream-icon">🛍️</div><div class="stream-name">Digital Products</div><div class="stream-desc">AI creates and lists prompt packs, templates, guides on Gumroad/Etsy</div><div class="stream-potential">$100–$2,500/mo</div></div>
+    <div class="stream-card"><div class="stream-icon">🤝</div><div class="stream-name">Referral Program</div><div class="stream-desc">Your users earn 30% commission bringing in more subscribers for you</div><div class="stream-potential">$500–$10,000/mo</div></div>
+    <div class="stream-card"><div class="stream-icon">📌</div><div class="stream-name">Pinterest Traffic</div><div class="stream-desc">AI auto-pins content driving passive SEO traffic to monetized pages</div><div class="stream-potential">$75–$1,500/mo</div></div>
+    <div class="stream-card"><div class="stream-icon">💼</div><div class="stream-name">Subscriptions (Your Users)</div><div class="stream-desc">Recurring $49–$499/mo from users who pay for your platform</div><div class="stream-potential">$2,000–$50,000/mo</div></div>
+    <div class="stream-card"><div class="stream-icon">🔄</div><div class="stream-name">Content Syndication</div><div class="stream-desc">Top content auto-repurposed across Substack, LinkedIn, Reddit for traffic</div><div class="stream-potential">$50–$600/mo</div></div>
+  </div>
+</section>
+
+<!-- DASHBOARD PREVIEW -->
+<section class="fade-in">
+  <div class="sec-tag">// REVENUE DASHBOARD</div>
+  <div class="sec-h">WAKE UP.<br/>CHECK THE MONEY.</div>
+  <div class="dash-preview">
+    <div class="dash-header">
+      <div class="dash-title-txt">REVENUE OVERVIEW</div>
+      <div class="dash-live"><div class="pulse-dot"></div> LIVE</div>
+    </div>
+    <div class="rev-big">
+      <div class="rev-big-val" id="preview-rev">$0</div>
+      <div class="rev-big-lbl">Total Lifetime Earnings</div>
+    </div>
+    <div class="mini-grid">
+      <div class="mini"><div class="mini-v" id="p-today">$0</div><div class="mini-l">Today</div></div>
+      <div class="mini"><div class="mini-v" id="p-month">$0</div><div class="mini-l">This Month</div></div>
+      <div class="mini"><div class="mini-v" id="p-agents">18</div><div class="mini-l">Active Agents</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="fade-in">
+  <div class="sec-tag">// PRICING</div>
+  <div class="sec-h">CHOOSE YOUR<br/>LEVEL OF FREEDOM.</div>
+  <p class="sec-sub">All plans include a 7-day free trial. No card required to start.</p>
+  <div class="price-grid">
+    <div class="price-card">
+      <div class="price-tier">Starter</div>
+      <div class="price-val"><sup>$</sup>49<sub>/mo</sub></div>
+      <div class="price-agents">5 Active Agents</div>
+      <div class="price-desc">Perfect for creators launching their first AI income stream.</div>
+      <ul class="price-list">
+        <li>5 autonomous AI agents</li><li>2 platforms (TikTok + Instagram)</li>
+        <li>1x daily posting</li><li>Affiliate link automation</li>
+        <li>Basic revenue dashboard</li><li>Email support</li>
+      </ul>
+      <button class="btn-plan out" onclick="checkout('starter')">Start Free Trial</button>
+    </div>
+    <div class="price-card pop">
+      <div class="pop-tag">MOST POPULAR</div>
+      <div class="price-tier">Pro</div>
+      <div class="price-val"><sup>$</sup>149<sub>/mo</sub></div>
+      <div class="price-agents">12 Active Agents</div>
+      <div class="price-desc">For serious builders ready to run a full passive income operation.</div>
+      <ul class="price-list">
+        <li>12 autonomous AI agents</li><li>All 5 social platforms</li>
+        <li>5x daily posting</li><li>Email list builder + newsletter agent</li>
+        <li>Digital product creator agent</li><li>Full analytics + optimization AI</li>
+        <li>Faceless YouTube agent</li>
+      </ul>
+      <button class="btn-plan" onclick="checkout('pro')">Deploy 12 Agents</button>
+    </div>
+    <div class="price-card">
+      <div class="price-tier">Empire</div>
+      <div class="price-val"><sup>$</sup>499<sub>/mo</sub></div>
+      <div class="price-agents">ALL 18 Agents</div>
+      <div class="price-desc">Every agent. Every income stream. Unlimited scale.</div>
+      <ul class="price-list">
+        <li>All 18 autonomous agents</li><li>Unlimited campaigns + platforms</li>
+        <li>White-label resell rights</li><li>Pinterest + Medium + Substack agents</li>
+        <li>Competitor intelligence agent</li><li>Churn prediction + retention AI</li>
+        <li>1-on-1 onboarding with Michael</li>
+      </ul>
+      <button class="btn-plan" onclick="checkout('empire')">Deploy All 18 Agents</button>
+    </div>
+  </div>
+  <div class="pay-logos">
+    <div class="pay-logo">💳 Stripe</div>
+    <div class="pay-logo">🅿️ PayPal</div>
+    <div class="pay-logo">G Google Pay</div>
+    <div class="pay-logo">🍎 Apple Pay</div>
+  </div>
+</section>
+
+<!-- AFFILIATE -->
+<section id="affiliate" class="fade-in">
+  <div class="sec-tag">// AFFILIATE PROGRAM</div>
+  <div class="sec-h">YOUR USERS<br/>SELL FOR YOU.</div>
+  <div class="aff-box">
+    <div class="aff-pct">30%</div>
+    <div class="aff-sub">Recurring commission every month for every person you refer</div>
+    <div class="aff-steps">
+      <div class="aff-step"><div class="aff-n">1</div>Sign up for your free affiliate account</div>
+      <div class="aff-step"><div class="aff-n">2</div>Get your unique referral link</div>
+      <div class="aff-step"><div class="aff-n">3</div>Share it — the AI agents will even create content promoting it for you</div>
+      <div class="aff-step"><div class="aff-n">4</div>Earn 30% every single month, forever, for every subscriber you bring</div>
+    </div>
+    <button class="btn-aff" onclick="window.location.href='portal.html'">Join Affiliate Program →</button>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section class="fade-in">
+  <div class="sec-tag">// THE FOUNDER</div>
+  <div class="sec-h">BUILT BY SOMEONE<br/>WHO NEEDED IT TO WORK.</div>
+  <div class="founder">
+    <div class="founder-inner">
+      <div class="f-av">👤</div>
+      <div class="f-bio">
+        <div class="f-name">MICHAEL MEIER JR.</div>
+        <div class="f-title">FOUNDER & CEO // FREE WILL AI // SAVANNAH, GA</div>
+        <p>Four years homeless in Savannah, Georgia. No laptop. No funding. No team. <strong>One Android phone and an unshakeable decision.</strong></p>
+        <p>While others scrolled, Michael studied AI architecture, SaaS business models, and autonomous agent systems — building Free Will AI entirely on a Moto G. Every agent in this platform was designed by someone who understood at a cellular level what it means to need money to come in without trading every hour of your day for it.</p>
+        <p><strong>He built the tool he needed. Then he gave it to the world.</strong></p>
+        <div class="f-links">
+          <a class="f-link" href="about.html">Full Story →</a>
+          <a class="f-link" href="mailto:michael@freewillai.com">Contact</a>
+          <a class="f-link" href="#pricing">Use the Platform</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEAD MAGNET -->
+<section class="fade-in">
+  <div class="magnet">
+    <h2>🎁 GET 10 FREE AI SCRIPTS</h2>
+    <p>Drop your email and we'll send you 10 viral, monetized scripts you can post today. No card. No catch. Just results.</p>
+    <div class="magnet-form">
+      <input class="magnet-input" type="email" id="mag-email" placeholder="you@email.com"/>
+      <button class="btn-magnet" onclick="claimScripts()">Send Free Scripts</button>
+    </div>
+    <div class="magnet-ok" id="mag-ok">✓ Sent! Check your inbox in the next 2 minutes.</div>
+    <p class="magnet-note">No spam. No credit card. Just 10 scripts that work.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="f-logo">FREE<span>WILL</span> AI</div>
+    <div class="f-tagline">YOUR AI · YOUR RULES · YOUR INCOME // BUILT IN SAVANNAH, GA</div>
+    <div class="f-cols">
+      <div class="f-col"><h4>Platform</h4><a href="#agents">All 18 Agents</a><a href="#income">Income Streams</a><a href="portal.html">Client Portal</a><a href="dashboard.html">Dashboard</a><a href="generate.html">AI Generator</a></div>
+      <div class="f-col"><h4>Company</h4><a href="about.html">About Michael</a><a href="about.html">Founder Story</a><a href="mailto:michael@freewillai.com">Contact</a><a href="#affiliate">Affiliate Program</a></div>
+      <div class="f-col"><h4>Legal</h4><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a></div>
+    </div>
+    <div class="f-bottom">
+      <p>© 2026 Free Will AI. Founded by Michael Meier Jr. Built on a phone. Built for everyone.</p>
+      <p><a href="#">Netlify</a> · <a href="#">Claude AI</a> · <a href="#">Stripe</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- BOTTOM NAV -->
+<nav class="bnav">
+  <a class="bnav-a active" href="/"><span class="bnav-i">🏠</span>Home</a>
+  <a class="bnav-a" href="portal.html"><span class="bnav-i">🔑</span>Portal</a>
+  <a class="bnav-a" href="dashboard.html"><span class="bnav-i">📊</span>Dash</a>
+  <a class="bnav-a" href="generate.html"><span class="bnav-i">🤖</span>AI Write</a>
+  <a class="bnav-a" href="revenue.html"><span class="bnav-i">💰</span>Revenue</a>
+  <a class="bnav-a" href="settings.html"><span class="bnav-i">⚙️</span>Settings</a>
+</nav>
+<div style="height:70px;"></div>
+
+<script>
+// ── ALL 18 AGENTS ──
+const AGENTS = [
+  {icon:'🔍',name:'Trend Research Agent',desc:'Scans TikTok, Reddit, Twitter, Google Trends every 3 hours for viral topics in your niche.',status:'Scanning Finance trends...',income:'$0 (feeds all other agents)',color:'rgba(79,142,247,.06)',accent:'#4f8ef7',dot:'active',progress:78},
+  {icon:'✍️',name:'Script Writer Agent',desc:'Claude AI writes 5 viral scripts daily optimized for your platform and brand voice.',status:'Writing 3 scripts for tomorrow...',income:'Enables $200–$2K/mo in affiliate',color:'rgba(167,139,250,.06)',accent:'#a78bfa',dot:'active',progress:45},
+  {icon:'🎬',name:'Video Creator Agent',desc:'Turns scripts into post-ready content using text-to-video AI pipeline.',status:'Rendering 2 videos — 67%...',income:'Powers AdSense + affiliate revenue',color:'rgba(244,114,182,.06)',accent:'#f472b6',dot:'active',progress:67},
+  {icon:'📤',name:'Publisher Agent',desc:'Schedules and publishes across TikTok, Instagram, YouTube, Twitter, LinkedIn at peak times.',status:'Scheduled 5 posts for 7AM...',income:'Drives all platform revenue',color:'rgba(34,211,238,.06)',accent:'#22d3ee',dot:'active',progress:100},
+  {icon:'💰',name:'Affiliate Link Agent',desc:'Auto-inserts highest-converting affiliate links from Amazon, ClickBank, Impact.com into every post.',status:'Inserted links into 4 posts...',income:'+$48 earned today',color:'rgba(74,222,128,.06)',accent:'#4ade80',dot:'earning',progress:88},
+  {icon:'📧',name:'Email List Builder Agent',desc:'Captures leads from every post, builds your list automatically, segments by interest.',status:'Added 12 new subscribers...',income:'List: 847 subscribers',color:'rgba(251,191,36,.06)',accent:'#fbbf24',dot:'active',progress:62},
+  {icon:'📰',name:'Newsletter Agent',desc:'Auto-writes and sends a monetized weekly newsletter to your entire list with affiliate offers.',status:'Drafting Tuesday newsletter...',income:'+$127 last send',color:'rgba(251,191,36,.06)',accent:'#fbbf24',dot:'earning',progress:35},
+  {icon:'📺',name:'Faceless YouTube Agent',desc:'Generates scripts, titles, descriptions, and tags for faceless YouTube channels earning AdSense.',status:'Generated 3 YT scripts...',income:'Projected: $200–$5K/mo',color:'rgba(248,113,113,.06)',accent:'#f87171',dot:'active',progress:55},
+  {icon:'✏️',name:'Medium/Substack Agent',desc:'Auto-publishes AI-written articles to Medium and Substack earning partner program revenue.',status:'Published 2 articles today...',income:'+$34 this week',color:'rgba(167,139,250,.06)',accent:'#a78bfa',dot:'earning',progress:70},
+  {icon:'🛍️',name:'Digital Product Agent',desc:'Creates and lists AI prompt packs, templates, and guides on Gumroad and PromptBase automatically.',status:'Listed 2 new prompt packs...',income:'+$89 this week',color:'rgba(74,222,128,.06)',accent:'#4ade80',dot:'earning',progress:80},
+  {icon:'📌',name:'Pinterest Traffic Agent',desc:'Auto-pins optimized content driving passive SEO traffic to all your monetized pages.',status:'Published 14 pins today...',income:'2,847 monthly visitors',color:'rgba(248,113,113,.06)',accent:'#f87171',dot:'active',progress:90},
+  {icon:'🔄',name:'Content Repurpose Agent',desc:'Takes your top performing posts and automatically reformats them for every other platform.',status:'Repurposing top 3 posts...',income:'3x reach per piece of content',color:'rgba(34,211,238,.06)',accent:'#22d3ee',dot:'active',progress:42},
+  {icon:'💬',name:'Comment Reply Agent',desc:'Claude AI automatically replies to comments on all platforms to boost engagement and algorithm reach.',status:'Replied to 23 comments...',income:'+40% engagement increase',color:'rgba(79,142,247,.06)',accent:'#4f8ef7',dot:'active',progress:95},
+  {icon:'📊',name:'Analytics Brain Agent',desc:'Reads all performance data nightly, identifies what makes money, and reallocates effort automatically.',status:'Analyzing last 7 days...',income:'Optimizes all other agents',color:'rgba(251,191,36,.06)',accent:'#fbbf24',dot:'active',progress:30},
+  {icon:'🏆',name:'Competitor Intel Agent',desc:'Monitors competitors in your niche, identifies what content is working for them, and replicates success.',status:'Monitoring 12 competitors...',income:'Keeps you ahead of the curve',color:'rgba(244,114,182,.06)',accent:'#f472b6',dot:'active',progress:58},
+  {icon:'🔮',name:'Trend Forecaster Agent',desc:'Predicts what topics will go viral 48 hours before they peak so your content rides the wave.',status:'Forecasting next 48hrs...',income:'First-mover advantage',color:'rgba(167,139,250,.06)',accent:'#a78bfa',dot:'active',progress:72},
+  {icon:'🔒',name:'Churn Prevention Agent',desc:'Identifies users about to cancel their subscription and automatically triggers personalized retention offers.',status:'Monitoring 23 at-risk users...',income:'Saves $400–$2K/mo in churn',color:'rgba(248,113,113,.06)',accent:'#f87171',dot:'earning',progress:85},
+  {icon:'🚀',name:'Revenue Optimizer Agent',desc:'Runs nightly A/B tests on posting times, affiliate products, and content formats to maximize earnings.',status:'Running 4 optimization tests...',income:'+23% revenue increase/month',color:'rgba(74,222,128,.06)',accent:'#4ade80',dot:'earning',progress:65},
+];
+
+// Render agents
+const grid = document.getElementById('agent-grid');
+grid.innerHTML = AGENTS.map((a,i)=>`
+  <div class="agent-card active" style="--glow-color:${a.color};--accent-color:${a.accent};animation:fadeUp .4s ${i*.04}s ease both;">
+    <div class="agent-header">
+      <span class="agent-icon">${a.icon}</span>
+      <span class="agent-name">${a.name}</span>
+      <div class="agent-status-dot dot-${a.dot}"></div>
+    </div>
+    <div class="agent-desc">${a.desc}</div>
+    <div class="agent-status-text" id="as-${i}">${a.status}</div>
+    <div class="agent-income ${a.dot==='earning'?'income-green':'income-amber'}">${a.income}</div>
+    <div class="agent-progress"><div class="agent-progress-fill" style="width:${a.progress}%;background:linear-gradient(90deg,${a.accent},${a.accent}88)"></div></div>
+  </div>
+`).join('');
+
+// Cycle agent statuses
+const statusCycles = {
+  1:['Writing 3 scripts for tomorrow...','Optimizing hooks for 30-sec...','Inserting affiliate links...','5 scripts ready to publish...'],
+  4:['Inserted links into 4 posts...','Found higher-converting offer...','Amazon link: 3.2% CTR today...','Auto-switched to top product...'],
+  5:['Added 12 new subscribers...','Segmented 847 subscribers...','Sent welcome sequence to 5...','Email list growing +12/day...'],
+};
+Object.keys(statusCycles).forEach(i=>{
+  let idx=0;
+  setInterval(()=>{
+    idx=(idx+1)%statusCycles[i].length;
+    const el=document.getElementById('as-'+i);
+    if(el) el.textContent=statusCycles[i][idx];
+  },(3500+parseInt(i)*400));
+});
+
+// ── TICKER ──
+let t1=14203,t2=8421,t3=3847,t4=142;
+setInterval(()=>{
+  t1+=Math.floor(Math.random()*5)+1; t2+=Math.floor(Math.random()*4)+1;
+  t3+=Math.floor(Math.random()*3)+1; t4+=Math.floor(Math.random()*1);
+  document.getElementById('t1').textContent=t1.toLocaleString();
+  document.getElementById('t2').textContent='$'+t2.toLocaleString();
+  document.getElementById('t3').textContent=t3.toLocaleString();
+  document.getElementById('t4').textContent=t4.toLocaleString();
+},3500);
+
+// ── COUNTDOWN ──
+const end=new Date(Date.now()+7*24*60*60*1000);
+function cd(){
+  const d=end-Date.now();
+  if(d<=0) return;
+  document.getElementById('cd-d').textContent=String(Math.floor(d/86400000)).padStart(2,'0');
+  document.getElementById('cd-h').textContent=String(Math.floor((d%86400000)/3600000)).padStart(2,'0');
+  document.getElementById('cd-m').textContent=String(Math.floor((d%3600000)/60000)).padStart(2,'0');
+  document.getElementById('cd-s').textContent=String(Math.floor((d%60000)/1000)).padStart(2,'0');
+}
+setInterval(cd,1000);cd();
+
+// ── DASHBOARD PREVIEW COUNTERS ──
+function animN(id,target,pre='$'){
+  const el=document.getElementById(id);let c=0;const s=Math.ceil(target/60);
+  const t=setInterval(()=>{c=Math.min(c+s,target);el.textContent=pre+c.toLocaleString();if(c>=target)clearInterval(t);},18);
+}
+setTimeout(()=>{animN('preview-rev',18432);animN('p-today',284);animN('p-month',4821);},800);
+
+// ── SCROLL FADE ──
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis');});},{threshold:.08});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+
+// ── CHECKOUT ──
+async function checkout(plan){
+  try{
+    const res=await fetch('/.netlify/functions/create-checkout',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({plan,mode:['scripts','guide'].includes(plan)?'payment':'subscription'})
+    });
+    const d=await res.json();
+    if(d.url) window.location.href=d.url;
+    else alert('Add your Stripe Price IDs in Netlify environment variables to enable payments.');
+  }catch(e){alert('Stripe not yet connected. Follow the SETUP_GUIDE.md to connect your keys.');}
+}
+
+// ── LEAD MAGNET ──
+async function claimScripts(){
+  const email=document.getElementById('mag-email').value.trim();
+  if(!email||!email.includes('@')){alert('Enter a valid email.');return;}
+  try{
+    await fetch('/.netlify/functions/send-magic-link',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,source:'lead-magnet'})});
+  }catch(e){}
+  document.getElementById('mag-ok').style.display='block';
+  document.getElementById('mag-email').value='';
+}
+</script>
+</body>
+</html>

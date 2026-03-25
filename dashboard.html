@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Agent Command Center — Free Will AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#050709;--bg2:#080b10;--card:#0a0d14;--card2:#0e1119;--blue:#4f8ef7;--cyan:#22d3ee;--green:#4ade80;--amber:#fbbf24;--pink:#f472b6;--purple:#a78bfa;--red:#f87171;--orange:#fb923c;--text:#e8edf8;--muted:#4a5272;--border:rgba(79,142,247,0.1);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(79,142,247,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(79,142,247,.02) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;}
+.blob{position:fixed;border-radius:50%;filter:blur(130px);pointer-events:none;z-index:0;}
+.b1{width:400px;height:400px;background:rgba(79,142,247,.05);top:-100px;left:-100px;}
+.b2{width:350px;height:350px;background:rgba(74,222,128,.04);bottom:-100px;right:-100px;}
+nav{position:sticky;top:0;z-index:100;background:rgba(5,7,9,.92);backdrop-filter:blur(28px);border-bottom:1px solid var(--border);height:58px;display:flex;align-items:center;padding:0 20px;gap:8px;}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:auto;}
+.logo-arc{width:27px;height:27px;border:2.5px solid var(--blue);border-bottom:none;border-radius:50% 50% 0 0;filter:drop-shadow(0 0 8px rgba(79,142,247,.7));}
+.logo-name{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;}
+.logo-name span{color:var(--blue);}
+.nav-a{color:var(--muted);font-size:13px;text-decoration:none;padding:6px 10px;border-radius:6px;transition:.2s;}
+.nav-a:hover{color:var(--text);}
+main{position:relative;z-index:1;padding:24px 16px 100px;max-width:800px;margin:0 auto;}
+.page-h{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:3px;margin-bottom:6px;}
+.page-sub{font-size:13px;color:var(--muted);margin-bottom:20px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;}
+@media(min-width:540px){.stats{grid-template-columns:repeat(4,1fr);}}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center;position:relative;overflow:hidden;}
+.stat::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(79,142,247,.3),transparent);}
+.stat-v{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:var(--blue);}
+.stat-v.g{color:var(--green);}
+.stat-v.a{color:var(--amber);}
+.stat-v.c{color:var(--cyan);}
+.stat-l{font-size:10px;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:1px;}
+
+/* TOTAL REVENUE */
+.rev-hero{background:linear-gradient(135deg,rgba(74,222,128,.05),rgba(79,142,247,.05));border:1px solid rgba(74,222,128,.15);border-radius:14px;padding:22px;text-align:center;margin-bottom:16px;position:relative;overflow:hidden;}
+.rev-hero::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--green),transparent);}
+.rev-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;font-family:'JetBrains Mono',monospace;}
+.rev-val{font-family:'JetBrains Mono',monospace;font-size:46px;font-weight:700;color:var(--green);text-shadow:0 0 40px rgba(74,222,128,.2);line-height:1;}
+.rev-sub{font-size:12px;color:var(--muted);margin-top:6px;}
+.rev-sub span{color:var(--green);font-weight:600;}
+
+/* AGENT COMMAND CENTER */
+.section-h{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;margin-bottom:12px;color:var(--cyan);}
+.agents-list{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
+.ag{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:11px;padding:12px 14px;transition:.2s;position:relative;overflow:hidden;}
+.ag.on{border-color:rgba(79,142,247,.22);}
+.ag.earning{border-color:rgba(74,222,128,.22);}
+.ag::after{content:'';position:absolute;bottom:0;left:0;height:2px;background:linear-gradient(90deg,var(--accent,var(--blue)),transparent);transition:width .6s ease;}
+.ag-icon{font-size:20px;flex-shrink:0;}
+.ag-info{flex:1;min-width:0;}
+.ag-name{font-size:13px;font-weight:700;margin-bottom:2px;}
+.ag-status{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.ag-right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0;}
+.ag-income{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;}
+.ag-income.g{color:var(--green);}
+.ag-income.a{color:var(--amber);}
+.ag-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.dot-on{background:var(--green);animation:pulse 2s infinite;}
+.dot-earn{background:var(--amber);animation:pulse 1.5s infinite;}
+.dot-off{background:var(--muted);}
+
+/* CHART */
+.chart-card{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:18px;margin-bottom:16px;}
+.chart-h{font-size:13px;font-weight:700;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;}
+.chart-total{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--green);}
+.bars{display:flex;align-items:flex-end;gap:3px;height:80px;}
+.bar{flex:1;border-radius:2px 2px 0 0;background:linear-gradient(to top,var(--blue2,var(--blue)),var(--blue));opacity:.65;min-width:4px;transition:opacity .2s,height .8s ease;}
+.bar:hover{opacity:1;}
+
+/* STREAM BREAKDOWN */
+.stream-list{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
+.stream{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 14px;}
+.stream-icon{font-size:18px;flex-shrink:0;}
+.stream-name{font-size:13px;font-weight:600;flex:1;}
+.stream-val{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--green);font-weight:700;}
+.stream-bar-w{width:80px;height:5px;background:rgba(255,255,255,.05);border-radius:3px;overflow:hidden;}
+.stream-bar-f{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--blue),var(--cyan));}
+
+/* BOOST */
+.btn-boost{width:100%;background:linear-gradient(135deg,var(--green),#15803d);color:#052e0a;font-family:'DM Sans',sans-serif;font-weight:800;font-size:14px;padding:14px;border:none;border-radius:11px;cursor:pointer;transition:.2s;margin-bottom:10px;letter-spacing:.3px;}
+.btn-boost:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(74,222,128,.28);}
+.btn-blue{width:100%;background:linear-gradient(135deg,var(--blue),var(--cyan));color:#050709;font-family:'DM Sans',sans-serif;font-weight:800;font-size:14px;padding:13px;border:none;border-radius:11px;cursor:pointer;transition:.2s;text-decoration:none;display:block;text-align:center;letter-spacing:.3px;}
+.btn-blue:hover{opacity:.88;}
+
+/* BOTTOM NAV */
+.bnav{position:fixed;bottom:0;left:0;right:0;background:rgba(5,7,9,.96);backdrop-filter:blur(24px);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:10px 0 16px;z-index:100;}
+.bnav-a{background:none;border:none;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:9px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;padding:0 8px;transition:.2s;text-decoration:none;text-transform:uppercase;letter-spacing:.5px;}
+.bnav-a:hover,.bnav-a.active{color:var(--blue);}
+.bnav-i{font-size:18px;}
+
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(74,222,128,.5);}70%{box-shadow:0 0 0 5px rgba(74,222,128,0);}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+main{animation:fadeUp .5s ease both;}
+</style>
+</head>
+<body>
+<div class="blob b1"></div><div class="blob b2"></div>
+<nav>
+  <a class="logo" href="/"><div class="logo-arc"></div><span class="logo-name">FREE<span>WILL</span> AI</span></a>
+  <a class="nav-a" href="portal.html">Portal</a>
+  <a class="nav-a" href="generate.html">AI Write</a>
+  <a class="nav-a" href="revenue.html">Revenue</a>
+</nav>
+<main>
+  <div class="page-h">AGENT COMMAND CENTER</div>
+  <div class="page-sub">// 18 AUTONOMOUS AGENTS · ALL SYSTEMS OPERATIONAL</div>
+
+  <!-- STATS ROW -->
+  <div class="stats">
+    <div class="stat"><div class="stat-v" id="s-posts">0</div><div class="stat-l">Posts Published</div></div>
+    <div class="stat"><div class="stat-v c" id="s-views">0</div><div class="stat-l">Total Views</div></div>
+    <div class="stat"><div class="stat-v g" id="s-rev">$0</div><div class="stat-l">Revenue</div></div>
+    <div class="stat"><div class="stat-v a">18/18</div><div class="stat-l">Agents Active</div></div>
+  </div>
+
+  <!-- REVENUE HERO -->
+  <div class="rev-hero">
+    <div class="rev-lbl">Total Lifetime Earnings</div>
+    <div class="rev-val" id="lifetime">$0</div>
+    <div class="rev-sub">↑ <span>+$284 today</span> across all 18 income streams</div>
+  </div>
+
+  <!-- REVENUE CHART -->
+  <div class="chart-card">
+    <div class="chart-h">
+      <span>Revenue — Last 30 Days</span>
+      <span class="chart-total" id="chart-total">$4,821 this month</span>
+    </div>
+    <div class="bars" id="chart"></div>
+  </div>
+
+  <!-- ALL 18 AGENTS -->
+  <div class="section-h">// ALL 18 ACTIVE AGENTS</div>
+  <div class="agents-list" id="agents-list"></div>
+
+  <!-- INCOME STREAMS -->
+  <div class="section-h">// ACTIVE INCOME STREAMS</div>
+  <div class="stream-list">
+    <div class="stream"><span class="stream-icon">📱</span><span class="stream-name">Social Media Affiliate</span><div class="stream-bar-w"><div class="stream-bar-f" style="width:72%"></div></div><span class="stream-val">$48/day</span></div>
+    <div class="stream"><span class="stream-icon">📧</span><span class="stream-name">Email Newsletter</span><div class="stream-bar-w"><div class="stream-bar-f" style="width:45%;background:linear-gradient(90deg,#fbbf24,#f97316)"></div></div><span class="stream-val">$127/send</span></div>
+    <div class="stream"><span class="stream-icon">🛍️</span><span class="stream-name">Digital Products</span><div class="stream-bar-w"><div class="stream-bar-f" style="width:38%;background:linear-gradient(90deg,#a78bfa,#f472b6)"></div></div><span class="stream-val">$89/week</span></div>
+    <div class="stream"><span class="stream-icon">✍️</span><span class="stream-name">Medium Partner Program</span><div class="stream-bar-w"><div class="stream-bar-f" style="width:25%;background:linear-gradient(90deg,#22d3ee,#4ade80)"></div></div><span class="stream-val">$34/week</span></div>
+    <div class="stream"><span class="stream-icon">👥</span><span class="stream-name">Referral Commissions</span><div class="stream-bar-w"><div class="stream-bar-f" style="width:60%;background:linear-gradient(90deg,#4ade80,#22d3ee)"></div></div><span class="stream-val">$210/mo</span></div>
+  </div>
+
+  <button class="btn-boost" id="boost-btn" onclick="boostAll()">⚡ BOOST ALL AGENTS — MAXIMIZE NEXT 24 HOURS</button>
+  <a class="btn-blue" href="generate.html">→ OPEN AI SCRIPT GENERATOR</a>
+</main>
+
+<nav class="bnav">
+  <a class="bnav-a" href="/"><span class="bnav-i">🏠</span>Home</a>
+  <a class="bnav-a" href="portal.html"><span class="bnav-i">🔑</span>Portal</a>
+  <a class="bnav-a active" href="dashboard.html"><span class="bnav-i">📊</span>Dash</a>
+  <a class="bnav-a" href="generate.html"><span class="bnav-i">🤖</span>AI Write</a>
+  <a class="bnav-a" href="revenue.html"><span class="bnav-i">💰</span>Revenue</a>
+  <a class="bnav-a" href="settings.html"><span class="bnav-i">⚙️</span>Settings</a>
+</nav>
+
+<script>
+const AGENTS=[
+  {icon:'🔍',name:'Trend Research',status:'Scanning Finance trends...',income:'Feeds all agents',type:'on',accent:'#4f8ef7'},
+  {icon:'✍️',name:'Script Writer',status:'Writing 3 scripts...',income:'$200-2K/mo',type:'on',accent:'#a78bfa'},
+  {icon:'🎬',name:'Video Creator',status:'Rendering 2 videos 67%...',income:'AdSense + affiliate',type:'on',accent:'#f472b6'},
+  {icon:'📤',name:'Publisher',status:'5 posts scheduled 7AM...',income:'All platform revenue',type:'on',accent:'#22d3ee'},
+  {icon:'💰',name:'Affiliate Link',status:'Links inserted in 4 posts...',income:'+$48 today',type:'earn',accent:'#4ade80'},
+  {icon:'📧',name:'Email List Builder',status:'Added 12 subscribers...',income:'847 subscribers',type:'on',accent:'#fbbf24'},
+  {icon:'📰',name:'Newsletter',status:'Drafting Tuesday send...',income:'+$127 last send',type:'earn',accent:'#fbbf24'},
+  {icon:'📺',name:'Faceless YouTube',status:'Generated 3 YT scripts...',income:'$200-5K/mo',type:'on',accent:'#f87171'},
+  {icon:'✏️',name:'Medium/Substack',status:'Published 2 articles...',income:'+$34 this week',type:'earn',accent:'#a78bfa'},
+  {icon:'🛍️',name:'Digital Products',status:'Listed 2 prompt packs...',income:'+$89 this week',type:'earn',accent:'#4ade80'},
+  {icon:'📌',name:'Pinterest Traffic',status:'Published 14 pins...',income:'2,847 visitors/mo',type:'on',accent:'#f87171'},
+  {icon:'🔄',name:'Content Repurpose',status:'Repurposing top 3 posts...',income:'3x reach',type:'on',accent:'#22d3ee'},
+  {icon:'💬',name:'Comment Replies',status:'Replied to 23 comments...',income:'+40% engagement',type:'on',accent:'#4f8ef7'},
+  {icon:'📊',name:'Analytics Brain',status:'Analyzing last 7 days...',income:'Optimizes all agents',type:'on',accent:'#fbbf24'},
+  {icon:'🏆',name:'Competitor Intel',status:'Monitoring 12 competitors...',income:'First-mover edge',type:'on',accent:'#f472b6'},
+  {icon:'🔮',name:'Trend Forecaster',status:'Forecasting next 48hrs...',income:'48hr advantage',type:'on',accent:'#a78bfa'},
+  {icon:'🔒',name:'Churn Prevention',status:'23 at-risk users monitored...',income:'Saves $400-2K/mo',type:'earn',accent:'#f87171'},
+  {icon:'🚀',name:'Revenue Optimizer',status:'Running 4 A/B tests...',income:'+23%/mo revenue',type:'earn',accent:'#4ade80'},
+];
+
+document.getElementById('agents-list').innerHTML = AGENTS.map((a,i)=>`
+  <div class="ag ${a.type==='earn'?'earning':'on'}" style="--accent:${a.accent};animation:fadeUp .3s ${i*.03}s ease both;">
+    <span class="ag-icon">${a.icon}</span>
+    <div class="ag-info">
+      <div class="ag-name">${a.name} Agent</div>
+      <div class="ag-status" id="ags-${i}">${a.status}</div>
+    </div>
+    <div class="ag-right">
+      <span class="ag-income ${a.type==='earn'?'g':'a'}">${a.income}</span>
+      <div class="ag-dot ${a.type==='earn'?'dot-earn':'dot-on'}"></div>
+    </div>
+  </div>
+`).join('');
+
+// Live status cycling
+const statusPool=[
+  ['Scanning Finance trends...','Found 5 viral hooks...','Queued 8 topics...'],
+  ['Writing 3 scripts...','Optimizing hooks...','5 scripts ready...'],
+  ['Rendering 67%...','Upload complete...','2 videos live...'],
+  ['5 posts scheduled...','Posted to TikTok...','Instagram next...'],
+  ['Links inserted x4...','CTR: 3.2% today...','Higher offer found...'],
+];
+statusPool.forEach((msgs,i)=>{
+  let idx=0;
+  setInterval(()=>{idx=(idx+1)%msgs.length;const el=document.getElementById('ags-'+i);if(el)el.textContent=msgs[idx];},(4000+i*300));
+});
+
+// Stat counters
+function an(id,target,pre=''){
+  const el=document.getElementById(id);let c=0;const s=Math.ceil(target/60);
+  const t=setInterval(()=>{c=Math.min(c+s,target);el.textContent=pre+(c>=1000000?(c/1000000).toFixed(1)+'M':c>=1000?(c/1000).toFixed(0)+'K':c.toLocaleString());if(c>=target)clearInterval(t);},18);
+}
+an('s-posts',2847);an('s-views',1240000);an('s-rev',4821,'$');an('lifetime',18432,'$');
+
+// Chart
+const vals=Array.from({length:30},(_,i)=>Math.floor(80+i*2.5+Math.random()*40));
+const max=Math.max(...vals);
+document.getElementById('chart').innerHTML=vals.map(v=>`<div class="bar" style="height:${(v/max*100)}%" title="$${v}"></div>`).join('');
+
+// Boost
+function boostAll(){
+  const btn=document.getElementById('boost-btn');
+  btn.textContent='⚡ ALL 18 AGENTS BOOSTED — RUNNING AT MAXIMUM CAPACITY...';
+  btn.disabled=true;btn.style.background='linear-gradient(135deg,#22d3ee,#4f8ef7)';
+  setTimeout(()=>{btn.textContent='✓ BOOST COMPLETE — 10 NEW POSTS QUEUED PER AGENT';},2500);
+  setTimeout(()=>{btn.textContent='⚡ BOOST ALL AGENTS — MAXIMIZE NEXT 24 HOURS';btn.disabled=false;btn.style.background='';},7000);
+}
+</script>
+</body>
+</html>

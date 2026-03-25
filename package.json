@@ -1,0 +1,15 @@
+{
+  "name": "freewillai",
+  "version": "1.0.0",
+  "description": "Free Will AI — Automated AI content empire platform. Built by Michael Meier Jr.",
+  "scripts": {
+    "dev": "netlify dev"
+  },
+  "dependencies": {
+    "stripe": "^14.0.0",
+    "node-fetch": "^3.3.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

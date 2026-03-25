@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Revenue Tracker — Free Will AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#07090f;--card:#0f1320;--card2:#141929;--blue:#5b9cf6;--blue2:#3b82f6;--green:#4ade80;--amber:#f59e0b;--purple:#a78bfa;--text:#eef0f8;--muted:#5a6282;--border:rgba(91,156,246,0.12);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:999;}
+.blob{position:fixed;border-radius:50%;filter:blur(130px);pointer-events:none;z-index:0;}
+.blob1{width:400px;height:400px;background:rgba(74,222,128,0.05);top:-100px;right:-100px;}
+.blob2{width:350px;height:350px;background:rgba(91,156,246,0.05);bottom:-100px;left:-100px;}
+nav{position:sticky;top:0;z-index:100;background:rgba(7,9,15,0.9);backdrop-filter:blur(28px);border-bottom:1px solid var(--border);height:60px;display:flex;align-items:center;padding:0 20px;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo-arc{width:27px;height:27px;border:2.5px solid var(--blue);border-bottom:none;border-radius:50% 50% 0 0;filter:drop-shadow(0 0 8px rgba(91,156,246,.7));}
+.logo-text{font-family:'Syne',sans-serif;font-size:17px;font-weight:900;}
+.logo-text .free{color:var(--text);}.logo-text .will{color:var(--blue);}.logo-text .ai{color:var(--purple);}
+main{position:relative;z-index:1;padding:28px 20px 100px;max-width:700px;margin:0 auto;}
+.page-title{font-family:'Syne',sans-serif;font-size:26px;font-weight:900;letter-spacing:-.5px;margin-bottom:20px;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:14px;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(91,156,246,.25),transparent);}
+.card h2{font-family:'Syne',sans-serif;font-size:16px;font-weight:800;margin-bottom:14px;}
+/* big number */
+.big-rev{background:linear-gradient(135deg,rgba(74,222,128,.06),rgba(91,156,246,.06));border:1px solid rgba(74,222,128,.2);border-radius:16px;padding:28px;text-align:center;margin-bottom:14px;box-shadow:0 0 60px rgba(74,222,128,.04);}
+.big-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;}
+.big-val{font-family:'JetBrains Mono',monospace;font-size:52px;font-weight:600;color:var(--green);text-shadow:0 0 40px rgba(74,222,128,.25);line-height:1;}
+.big-sub{font-size:13px;color:var(--muted);margin-top:8px;}
+.big-sub span{color:var(--green);font-weight:600;}
+/* mini stats */
+.mini-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:11px;margin-bottom:14px;}
+.mini{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center;}
+.mini-val{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:600;color:var(--blue);}
+.mini-lbl{font-size:11px;color:var(--muted);margin-top:3px;text-transform:uppercase;letter-spacing:.6px;}
+/* bars */
+.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:11px;}
+.bar-label{font-size:12px;color:var(--muted);width:80px;flex-shrink:0;}
+.bar-wrap{flex:1;height:7px;background:rgba(255,255,255,.05);border-radius:4px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--blue),var(--purple));transition:width 1s ease;}
+.bar-pct{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;width:32px;text-align:right;flex-shrink:0;}
+/* AI tip */
+.ai-tip{background:linear-gradient(135deg,rgba(91,156,246,.07),rgba(167,139,250,.07));border:1px solid rgba(91,156,246,.2);border-radius:14px;padding:20px;margin-bottom:14px;}
+.tip-label{font-size:10px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+.tip-text{font-size:14px;color:var(--text);line-height:1.7;}
+/* table */
+.tbl{width:100%;border-collapse:collapse;font-size:13px;}
+.tbl th{text-align:left;padding:8px 10px;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid var(--border);}
+.tbl td{padding:11px 10px;border-bottom:1px solid rgba(255,255,255,.03);}
+.tbl tr:last-child td{border:none;}
+.rev-green{color:var(--green);font-family:'JetBrains Mono',monospace;}
+/* bottom nav */
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(7,9,15,.95);backdrop-filter:blur(20px);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:10px 0 16px;z-index:100;}
+.bnav-btn{background:none;border:none;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:10px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;padding:0 10px;transition:.2s;text-decoration:none;}
+.bnav-btn.active,.bnav-btn:hover{color:var(--blue);}
+.bnav-icon{font-size:20px;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+main{animation:fadeUp .5s ease both;}
+</style>
+</head>
+<body>
+<div class="blob blob1"></div><div class="blob blob2"></div>
+<nav><a class="nav-logo" href="/"><div class="logo-arc"></div><span class="logo-text"><span class="free">Free</span><span class="will">Will</span><span class="ai"> AI</span></span></a></nav>
+<main>
+  <div class="page-title">💰 Revenue Tracker</div>
+
+  <div class="big-rev">
+    <div class="big-lbl">Total Lifetime Earnings</div>
+    <div class="big-val" id="lifetime">$0</div>
+    <div class="big-sub">↑ <span>+$284 this week</span> · Affiliate commissions + subscriptions</div>
+  </div>
+
+  <div class="mini-stats">
+    <div class="mini"><div class="mini-val" id="m-today">$0</div><div class="mini-lbl">Today</div></div>
+    <div class="mini"><div class="mini-val" id="m-month">$0</div><div class="mini-lbl">This Month</div></div>
+    <div class="mini"><div class="mini-val" id="m-posts">0</div><div class="mini-lbl">Posts Live</div></div>
+  </div>
+
+  <!-- AI Tip -->
+  <div class="ai-tip">
+    <div class="tip-label">🤖 AI Optimization Tip</div>
+    <div class="tip-text" id="ai-tip">Loading AI analysis of your revenue data...</div>
+  </div>
+
+  <!-- Platform Breakdown -->
+  <div class="card">
+    <h2>Revenue by Platform</h2>
+    <div class="bar-row"><div class="bar-label">TikTok</div><div class="bar-wrap"><div class="bar-fill" style="width:0%" data-w="72"></div></div><div class="bar-pct">72%</div></div>
+    <div class="bar-row"><div class="bar-label">YouTube</div><div class="bar-wrap"><div class="bar-fill" style="width:0%;background:linear-gradient(90deg,#f87171,#f97316)" data-w="15"></div></div><div class="bar-pct">15%</div></div>
+    <div class="bar-row"><div class="bar-label">Instagram</div><div class="bar-wrap"><div class="bar-fill" style="width:0%;background:linear-gradient(90deg,#a78bfa,#ec4899)" data-w="9"></div></div><div class="bar-pct">9%</div></div>
+    <div class="bar-row"><div class="bar-label">Twitter</div><div class="bar-wrap"><div class="bar-fill" style="width:0%;background:linear-gradient(90deg,#22d3ee,#3b82f6)" data-w="4"></div></div><div class="bar-pct">4%</div></div>
+  </div>
+
+  <!-- Type Breakdown -->
+  <div class="card">
+    <h2>Revenue by Type</h2>
+    <div class="bar-row"><div class="bar-label">Affiliate</div><div class="bar-wrap"><div class="bar-fill" style="width:0%" data-w="61"></div></div><div class="bar-pct">61%</div></div>
+    <div class="bar-row"><div class="bar-label">Subscriptions</div><div class="bar-wrap"><div class="bar-fill" style="width:0%;background:linear-gradient(90deg,#4ade80,#22c55e)" data-w="28"></div></div><div class="bar-pct">28%</div></div>
+    <div class="bar-row"><div class="bar-label">Sponsorships</div><div class="bar-wrap"><div class="bar-fill" style="width:0%;background:linear-gradient(90deg,#f59e0b,#ef4444)" data-w="11"></div></div><div class="bar-pct">11%</div></div>
+  </div>
+
+  <!-- Affiliate Table -->
+  <div class="card" style="overflow-x:auto;">
+    <h2>Top Affiliate Links</h2>
+    <table class="tbl">
+      <thead><tr><th>Product</th><th>Clicks</th><th>Earned</th><th>Conv%</th></tr></thead>
+      <tbody>
+        <tr><td>Wealthy Affiliate Course</td><td>412</td><td class="rev-green">$206</td><td>3.2%</td></tr>
+        <tr><td>Notion Pro (Amazon)</td><td>289</td><td class="rev-green">$87</td><td>2.8%</td></tr>
+        <tr><td>ClickBank AI Pack</td><td>198</td><td class="rev-green">$99</td><td>4.1%</td></tr>
+        <tr><td>Fiverr Referral</td><td>156</td><td class="rev-green">$47</td><td>1.9%</td></tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+<nav class="bottom-nav">
+  <a class="bnav-btn" href="/"><span class="bnav-icon">🏠</span>Home</a>
+  <a class="bnav-btn" href="portal.html"><span class="bnav-icon">🔑</span>Portal</a>
+  <a class="bnav-btn" href="dashboard.html"><span class="bnav-icon">📊</span>Dashboard</a>
+  <a class="bnav-btn" href="generate.html"><span class="bnav-icon">🤖</span>AI Write</a>
+  <a class="bnav-btn active" href="revenue.html"><span class="bnav-icon">💰</span>Revenue</a>
+  <a class="bnav-btn" href="settings.html"><span class="bnav-icon">⚙️</span>Settings</a>
+</nav>
+
+<script>
+// Animate big numbers
+function animRev(id, target, prefix='$'){
+  const el = document.getElementById(id); let cur=0;
+  const step = Math.ceil(target/70);
+  const t = setInterval(()=>{ cur=Math.min(cur+step,target); el.textContent=prefix+cur.toLocaleString(); if(cur>=target)clearInterval(t); },18);
+}
+animRev('lifetime',18432);
+animRev('m-today',284);
+animRev('m-month',4821);
+animRev('m-posts',2847,'');
+
+// Animate bars
+setTimeout(()=>{
+  document.querySelectorAll('.bar-fill').forEach(b=>{ b.style.width = b.dataset.w+'%'; });
+},300);
+
+// Load AI tip
+async function loadTip(){
+  try{
+    const res = await fetch('/.netlify/functions/generate-script',{
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        topic:'revenue optimization for a content creator. TikTok drives 72% of revenue, Finance niche performing best, affiliate links converting at 3.2%. Give ONE specific actionable tip to increase monthly revenue by 20%. Max 2 sentences. Be direct.',
+        platform:'Revenue Dashboard', length:'tip', tone:'Professional', hookStyle:'Direct advice'
+      })
+    });
+    const d = await res.json();
+    document.getElementById('ai-tip').textContent = d.hook || fallbackTip();
+  }catch(e){ document.getElementById('ai-tip').textContent = fallbackTip(); }
+}
+
+function fallbackTip(){
+  return 'Your TikTok Finance content drives 72% of revenue — increase posting frequency from 3x to 5x daily and test a debt-payoff sub-niche trending 40% above average this month. Doubling down on your top platform is the fastest path to +$500/month.';
+}
+loadTip();
+</script>
+</body>
+</html>

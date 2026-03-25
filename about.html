@@ -1,0 +1,120 @@
+<!-- ABOUT PAGE -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>About Michael Meier Jr — Free Will AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#07090f;--card:#0f1320;--card2:#141929;--blue:#5b9cf6;--green:#4ade80;--purple:#a78bfa;--pink:#f472b6;--text:#eef0f8;--muted:#5a6282;--border:rgba(91,156,246,0.12);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:999;}
+.blob{position:fixed;border-radius:50%;filter:blur(130px);pointer-events:none;z-index:0;}
+.blob1{width:400px;height:400px;background:rgba(91,156,246,0.06);top:-100px;right:-100px;}
+.blob2{width:350px;height:350px;background:rgba(167,139,250,0.05);bottom:-100px;left:-100px;}
+nav{position:sticky;top:0;z-index:100;background:rgba(7,9,15,0.9);backdrop-filter:blur(28px);border-bottom:1px solid var(--border);height:60px;display:flex;align-items:center;padding:0 20px;gap:8px;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:auto;}
+.logo-arc{width:27px;height:27px;border:2.5px solid var(--blue);border-bottom:none;border-radius:50% 50% 0 0;filter:drop-shadow(0 0 8px rgba(91,156,246,.7));}
+.logo-text{font-family:'Syne',sans-serif;font-size:17px;font-weight:900;}
+.logo-text .free{color:var(--text);}.logo-text .will{color:var(--blue);}.logo-text .ai{color:var(--purple);}
+.nav-a{color:var(--muted);font-size:14px;text-decoration:none;padding:6px 10px;border-radius:6px;}
+.nav-a:hover{color:var(--text);}
+.nav-cta{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;font-weight:700;font-size:13px;padding:9px 18px;border:none;border-radius:9px;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:none;}
+.hero{position:relative;z-index:1;padding:60px 20px 20px;max-width:700px;margin:0 auto;text-align:center;}
+.sec-tag{font-size:10px;font-weight:700;letter-spacing:3px;color:var(--blue);text-transform:uppercase;margin-bottom:14px;}
+h1{font-family:'Syne',sans-serif;font-size:clamp(28px,7vw,48px);font-weight:900;letter-spacing:-1.2px;line-height:1.1;margin-bottom:14px;}
+h1 span{background:linear-gradient(135deg,var(--blue),var(--purple),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{font-size:15px;color:var(--muted);line-height:1.7;max-width:500px;margin:0 auto 40px;}
+.founder-card{position:relative;z-index:1;max-width:700px;margin:0 auto 40px;padding:0 20px;}
+.f-visual{background:linear-gradient(135deg,rgba(91,156,246,.07),rgba(167,139,250,.07));border:1px solid rgba(91,156,246,.18);border-radius:20px;padding:30px;text-align:center;position:relative;overflow:hidden;}
+.f-visual::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--purple),var(--pink));}
+.f-av{width:100px;height:100px;border-radius:20px;background:linear-gradient(135deg,rgba(91,156,246,.2),rgba(167,139,250,.2));border:2px solid rgba(91,156,246,.3);display:flex;align-items:center;justify-content:center;font-size:50px;margin:0 auto 16px;}
+.f-name{font-family:'Syne',sans-serif;font-size:26px;font-weight:900;margin-bottom:4px;}
+.f-title{font-size:13px;color:var(--blue);font-weight:600;margin-bottom:18px;}
+.f-stats{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;}
+.f-stat-val{font-family:'Syne',sans-serif;font-size:22px;font-weight:900;color:var(--blue);}
+.f-stat-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
+.story{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:0 20px 80px;}
+.chapter{font-size:10px;font-weight:700;letter-spacing:2.5px;color:var(--purple);text-transform:uppercase;margin-bottom:8px;display:block;}
+h2{font-family:'Syne',sans-serif;font-size:22px;font-weight:900;margin:30px 0 14px;letter-spacing:-.5px;}
+p{font-size:15px;color:var(--muted);line-height:1.85;margin-bottom:18px;}
+p strong{color:var(--text);}
+.pull{background:linear-gradient(135deg,rgba(91,156,246,.06),rgba(167,139,250,.06));border-left:3px solid var(--blue);border-radius:0 12px 12px 0;padding:18px 22px;margin:24px 0;font-family:'DM Serif Display',serif;font-size:18px;color:var(--text);line-height:1.65;font-style:italic;}
+.highlight{background:rgba(74,222,128,.04);border:1px solid rgba(74,222,128,.14);border-radius:12px;padding:18px;margin:22px 0;}
+.highlight p{color:var(--text);margin:0;font-size:14px;}
+.highlight p strong{color:var(--green);}
+.story-cta{background:linear-gradient(135deg,rgba(91,156,246,.08),rgba(167,139,250,.08));border:1px solid rgba(91,156,246,.2);border-radius:18px;padding:32px 22px;text-align:center;margin-top:48px;}
+.story-cta h2{margin-top:0;}
+.story-cta p{max-width:420px;margin:0 auto 22px;}
+.btn-cta{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;font-family:'DM Sans',sans-serif;font-weight:700;font-size:15px;padding:14px 32px;border:none;border-radius:11px;cursor:pointer;text-decoration:none;display:inline-block;transition:.2s;}
+.btn-cta:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(91,156,246,.35);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+.hero,.founder-card{animation:fadeUp .6s ease both;}
+</style>
+</head>
+<body>
+<div class="blob blob1"></div><div class="blob blob2"></div>
+<nav>
+  <a class="nav-logo" href="/"><div class="logo-arc"></div><span class="logo-text"><span class="free">Free</span><span class="will">Will</span><span class="ai"> AI</span></span></a>
+  <a class="nav-a" href="/">Home</a>
+  <a class="nav-a" href="/#pricing">Pricing</a>
+  <a class="nav-cta" href="portal.html">Start Free →</a>
+</nav>
+<div class="hero">
+  <div class="sec-tag">The Founder Story</div>
+  <h1>He Had Nothing.<br/><span>So He Built Everything.</span></h1>
+  <p class="hero-sub">The story of Michael Meier Jr. — four years homeless in Savannah, Georgia, one Android phone, zero dollars, and a decision that changed everything.</p>
+</div>
+<div class="founder-card">
+  <div class="f-visual">
+    <div class="f-av">👤</div>
+    <div class="f-name">Michael Meier Jr.</div>
+    <div class="f-title">Founder & CEO · Free Will AI · Savannah, Georgia</div>
+    <div class="f-stats">
+      <div><div class="f-stat-val">4</div><div class="f-stat-lbl">Years Homeless</div></div>
+      <div><div class="f-stat-val">1</div><div class="f-stat-lbl">Android Phone</div></div>
+      <div><div class="f-stat-val">$0</div><div class="f-stat-lbl">Starting Capital</div></div>
+      <div><div class="f-stat-val">100%</div><div class="f-stat-lbl">Self-Built</div></div>
+    </div>
+  </div>
+</div>
+<div class="story">
+  <span class="chapter">Chapter One</span>
+  <h2>The City Nobody Talks About</h2>
+  <p>There is a version of this story that starts with a garage in Silicon Valley, a Stanford degree, and a $2 million seed round. This is not that story. This story starts on the streets of Savannah, Georgia.</p>
+  <p>Tourists come for the cobblestone squares, the Spanish moss, the pastel row houses and ghost tours. They take their pictures and leave. What they don't see are the people living in the in-between spaces of that beautiful city — the ones who know which doorways offer shelter when Georgia rain comes. <strong>Michael Meier Jr. knows those spaces. He has lived in them for four years.</strong></p>
+  <div class="pull">"Not couch-surfing homeless. Not between-apartments homeless. The real kind — the sustained kind that doesn't feel cinematic. It feels like evidence that maybe the people who doubted you were right."</div>
+  <p>Four years without a permanent address. Four years of waking up and deciding — against every signal the world was sending — that this was not the end of the story.</p>
+
+  <span class="chapter">Chapter Two</span>
+  <h2>The Decision Nobody Saw</h2>
+  <p>While most people with internet access were using their phones to scroll, Michael was using his to study. Not casually. With the focused energy of a person who has correctly identified that the window is open — and understands that windows close.</p>
+  <div class="highlight"><p>He taught himself <strong>AI architecture, SaaS business models, API integrations, database design, and revenue strategy</strong> — entirely on a Moto G Android phone. No laptop. No office. No team. Just a man, a signal, and a decision.</p></div>
+  <p>Every barrier that might cause a person with resources to slow down — the technical complexity, the financial uncertainty, the sheer audacity of believing you can build a technology company from nothing — he encountered those barriers without the safety net that makes most people willing to try. He tried anyway.</p>
+
+  <span class="chapter">Chapter Three</span>
+  <h2>Why He Built Free Will AI</h2>
+  <p>Michael built Free Will AI because he understood something deeply personal about the gap between people who have resources and people who don't: <strong>people without resources can't afford to trade time for small returns anymore.</strong> They need systems. They need leverage. They need something that works while they sleep.</p>
+  <p>He built the tool he needed himself. Then he decided to give it to everyone.</p>
+  <div class="pull">"Financial freedom for my family. Prove everyone who doubted me wrong. Build something that lasts. Change my life completely. Not four goals — one fire burning in four directions at once."</div>
+
+  <span class="chapter">Chapter Four</span>
+  <h2>What the Name Means</h2>
+  <p>"Free Will AI" is not a marketing decision. It is a philosophical statement from a man who knows what it means to have your circumstances try to override your choices. Free will — the actual concept that you are not controlled by your situation — was not abstract to Michael. It was his daily practice of choosing to build when everything around him pointed toward surrender.</p>
+  <p><strong>The product is the proof. The existence of Free Will AI is the argument.</strong> He did not wait until his circumstances were comfortable enough to deserve a dream. He started in the worst conditions available — and he built something real.</p>
+
+  <span class="chapter">To the skeptics</span>
+  <h2>To Everyone Who Didn't Think He Could</h2>
+  <p>This section is for the people who counted him out. Who heard his name and made a decision about his future before he'd had a chance to make one himself. Who saw where he was sleeping and assumed they knew where he was going.</p>
+  <p><strong>His name is Michael Meier Jr. He built a software company on a phone from the streets of Savannah. And he is just getting started.</strong></p>
+  <p>Remember it.</p>
+
+  <div class="story-cta">
+    <h2>Use What He Built</h2>
+    <p>Every subscription directly supports the man who built this from nothing. And it might just change your life the same way building it changed his.</p>
+    <a class="btn-cta" href="portal.html">Start Free Today →</a>
+  </div>
+</div>
+</body>
+</html>
